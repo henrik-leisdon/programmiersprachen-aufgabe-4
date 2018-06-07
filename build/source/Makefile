@@ -111,6 +111,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+source/CMakeFiles/listtest.dir/rule:
+	cd /home/thetrippleh/Dokumente/Grive/Uni/git/buw_programmiersprachen/programmiersprachen-aufgabenblatt-4/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/listtest.dir/rule
+.PHONY : source/CMakeFiles/listtest.dir/rule
+
+# Convenience name for target.
+listtest: source/CMakeFiles/listtest.dir/rule
+
+.PHONY : listtest
+
+# fast build rule for target.
+listtest/fast:
+	cd /home/thetrippleh/Dokumente/Grive/Uni/git/buw_programmiersprachen/programmiersprachen-aufgabenblatt-4/build && $(MAKE) -f source/CMakeFiles/listtest.dir/build.make source/CMakeFiles/listtest.dir/build
+.PHONY : listtest/fast
+
+# Convenience name for target.
 source/CMakeFiles/aufgabe1.dir/rule:
 	cd /home/thetrippleh/Dokumente/Grive/Uni/git/buw_programmiersprachen/programmiersprachen-aufgabenblatt-4/build && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/aufgabe1.dir/rule
 .PHONY : source/CMakeFiles/aufgabe1.dir/rule
@@ -152,6 +167,33 @@ aufgabe1.cpp.s:
 	cd /home/thetrippleh/Dokumente/Grive/Uni/git/buw_programmiersprachen/programmiersprachen-aufgabenblatt-4/build && $(MAKE) -f source/CMakeFiles/aufgabe1.dir/build.make source/CMakeFiles/aufgabe1.dir/aufgabe1.cpp.s
 .PHONY : aufgabe1.cpp.s
 
+liste_test.o: liste_test.cpp.o
+
+.PHONY : liste_test.o
+
+# target to build an object file
+liste_test.cpp.o:
+	cd /home/thetrippleh/Dokumente/Grive/Uni/git/buw_programmiersprachen/programmiersprachen-aufgabenblatt-4/build && $(MAKE) -f source/CMakeFiles/listtest.dir/build.make source/CMakeFiles/listtest.dir/liste_test.cpp.o
+.PHONY : liste_test.cpp.o
+
+liste_test.i: liste_test.cpp.i
+
+.PHONY : liste_test.i
+
+# target to preprocess a source file
+liste_test.cpp.i:
+	cd /home/thetrippleh/Dokumente/Grive/Uni/git/buw_programmiersprachen/programmiersprachen-aufgabenblatt-4/build && $(MAKE) -f source/CMakeFiles/listtest.dir/build.make source/CMakeFiles/listtest.dir/liste_test.cpp.i
+.PHONY : liste_test.cpp.i
+
+liste_test.s: liste_test.cpp.s
+
+.PHONY : liste_test.s
+
+# target to generate assembly for a file
+liste_test.cpp.s:
+	cd /home/thetrippleh/Dokumente/Grive/Uni/git/buw_programmiersprachen/programmiersprachen-aufgabenblatt-4/build && $(MAKE) -f source/CMakeFiles/listtest.dir/build.make source/CMakeFiles/listtest.dir/liste_test.cpp.s
+.PHONY : liste_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,11 +201,15 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... listtest"
 	@echo "... edit_cache"
 	@echo "... aufgabe1"
 	@echo "... aufgabe1.o"
 	@echo "... aufgabe1.i"
 	@echo "... aufgabe1.s"
+	@echo "... liste_test.o"
+	@echo "... liste_test.i"
+	@echo "... liste_test.s"
 .PHONY : help
 
 

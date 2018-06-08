@@ -90,6 +90,18 @@ List(List<T> const& list):
     }
 }
 
+List(std::initializer_list<T> list)
+{
+    for(auto it : list){
+        push_back(it);
+    }
+}
+
+~List(){
+    clear();
+}
+
+//size usw..
 
 
 bool empty() const
@@ -101,6 +113,8 @@ std::size_t size() const
 {
     return size_;
 }
+
+
 
 T front() const{
     if(empty()){
@@ -124,7 +138,7 @@ T back() const{
     }
 }
 
-//modifyer Functions:
+//modifier Functions:
 
 void push_front(T const data){
     ListNode<T>* node = new ListNode<T>;
@@ -161,6 +175,68 @@ void push_back(T const data){
     node = nullptr;
 }
 
+void pop_front(){
+    if(size() == 1)
+    {
+        assert(first_!=nullptr);
+        delete first_;
+        first_=nullptr;
+        size_ = 0;
+    }
+    else if(size() > 1)
+    {
+        ListNode<T>* destroy = first_;
+        first_=(*first_).next;
+        (*first_).prsev = nullptr;
+        delete destroy;
+        destroy = nullptr;
+        size_--;
+    
+    }
+    else
+    {
+        std::cout << "list is already empty";
+    }
+
+}
+
+
+
+void pop_back(){
+    if(empty()){
+        std::cout << "list is already empty";        
+    }
+    else if(size() == 1)
+    {
+        assert(last_!=nullptr);
+        delete last_;
+        last_=nullptr;
+        size_ = 0;
+    }    
+    else
+    {
+        ListNode<T>* destroy = last_;
+        last_=(*last_).prsev;
+        (*last_).next = nullptr;
+        delete destroy;
+        destroy = nullptr;
+        size_--;
+    }
+
+}
+void clear() 
+{
+    if(empty()){
+         std::cout << "list is already empty"; 
+    }
+    else
+    {
+        while(!empty())
+        {
+            pop_back();
+        }
+    }
+}
 
 
 
@@ -171,4 +247,6 @@ ListNode <T >* last_ ;
 };
 
 
-# endif // # define BUW_LIST_HPP
+# endif
+
+//#define BUW_LIST_HPP 

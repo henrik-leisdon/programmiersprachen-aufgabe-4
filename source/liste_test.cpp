@@ -30,9 +30,28 @@ TEST_CASE("constr and getter")
         REQUIRE(liste.size() == 2);
     }
 
-    SECTION("pop_back")
+    SECTION("pop_front")
+    {
+        List<int> liste;
+        liste.push_front(42);
+        liste.push_back(66);
+        REQUIRE(42 == liste.front());
+        REQUIRE(liste.size() == 2);
+        liste.pop_back();
+        REQUIRE(liste.size()==1);
+        liste.pop_back();
+        REQUIRE(liste.empty());
+    }
 
-
+    SECTION("clear")
+    {
+        List<int> liste;
+        liste.push_front(42);
+        liste.push_back(66);
+        liste.push_back(123);
+        liste.clear();
+        REQUIRE(liste.empty()); 
+    }
 };
 
 

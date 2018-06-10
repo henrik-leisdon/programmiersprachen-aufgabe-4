@@ -113,7 +113,7 @@ List(ListNode<T>* first):
     first_{first},
     last_{first},
     size_{1}
-    {}
+    {};
 
 
 
@@ -125,16 +125,28 @@ List(List<T> const& list):
     for(auto it = list.begin(); it!=list.end(); it++){
         push_back(*it);
     }
-}
+};
+
+List(List<T>&& list):
+    first_(list.first_),
+    last_(list.last_),
+    size_(list.size_)
+    {
+       list.first_=nullptr;
+       list.last_=nullptr;
+       list.size-=0; 
+    }
 
 List(std::initializer_list<T> list)
 {
-    for(auto it : list){
+    for(auto it : list)
+    {
         push_back(it);
     }
-}
+};
 
-~List(){
+~List()
+{
     clear();
 }
 
@@ -286,6 +298,14 @@ ListIterator<T> end() const
     return ListIterator<T>{last_}.next();
 }
 
+List<T>& operator=(List<T>const& list)
+{
+    clear();
+    for(ListIterator<T> it = list.begin();it!=list.end(); it++)
+    {
+        push_back(*it);
+    }
+}
 
 private :
 std::size_t size_ ;

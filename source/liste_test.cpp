@@ -52,7 +52,30 @@ TEST_CASE("constr and getter")
         liste.clear();
         REQUIRE(liste.empty()); 
     }
-    
+
+    SECTION("sould be an empty range...")
+    {
+        List<int> liste2;
+        auto b = liste2.begin();
+        auto e = liste2.end();
+        REQUIRE(b == e);
+    }
+
+    SECTION("prove access to first element")
+    {
+        List<int> liste;
+        liste.push_front(42);
+        REQUIRE(42 == *liste.begin());
+    }
+
+        SECTION("prove access to last element")
+    {
+        List<int> liste;
+        liste.push_front(42);
+        liste.push_back(43);
+        REQUIRE(43 == *liste.end());
+    }
+
 };
 
 

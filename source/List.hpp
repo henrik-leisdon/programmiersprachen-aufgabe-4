@@ -21,16 +21,6 @@ template <typename T>
 class ListIterator
 {
 public :
-
-    ListIterator():
-        node(nullptr)
-    {};
-
-    ListIterator(ListNode<T>* n):
-        node{n}
-    {};
-
-
     using Self = ListIterator<T>;
 
     using value_type = T;
@@ -39,14 +29,35 @@ public :
     using difference_type = ptrdiff_t;
     using iterator_category = std::bidirectional_iterator_tag;
 
-    ListIterator() {} // not implemented yet; initialisierlist?
-    ListIterator(ListNode<T>* n) {} // not implemented yet; initialiserlist?
-    reference operator*() const {} // not implemented yet
-    pointer operator->() const {} // not implemented yet
-    Self& operator++() {} // not implemented yet
-    Self operator++(int) {} // not implemented yet
-    bool operator==(Self const& x) const {} // not implemented yet
-    bool operator!=(Self const& x) const {} // not implemented yet
+    ListIterator(): 
+        node{nullptr}
+    {}; 
+
+    ListIterator(ListNode<T>* n):
+        node{n}
+    {};
+
+    reference operator*() const {
+        return node -> value;
+    } 
+    pointer operator->() const {
+        return *node;
+    } 
+    Self& operator++() {
+        node = node->next;
+        return *this;
+    } 
+    Self operator++(int) {
+        Self it(*this);
+        ++(*this);
+        return it;
+    } 
+    bool operator==(Self const& x) const {
+        return node==x.node;
+    } 
+    bool operator!=(Self const& x) const {
+        return node!=x.node;
+    } 
     Self next() const
     {
     if (node)
@@ -250,6 +261,7 @@ void pop_back(){
     }
 
 }
+
 void clear() 
 {
     if(empty()){
@@ -264,6 +276,15 @@ void clear()
     }
 }
 
+ListIterator<T> begin() const
+{
+    return ListIterator<T>{first_};
+}
+
+ListIterator<T> end() const
+{
+    return ListIterator<T>{last_}.next();
+}
 
 
 private :
@@ -271,6 +292,43 @@ std::size_t size_ ;
 ListNode <T >* first_ ;
 ListNode <T >* last_ ;
 };
+
+
+template<typename T>
+bool operator==(List<T> const& xs, List<T> const& ys)
+{
+    ListIterator<T> a = xs.begin();
+    ListIterator<T> b = ys.begin();
+    if(xs.size()!=ys.size())
+    {
+        return false;
+    }
+    else
+    {
+        int c = 0;
+        while(c<xs.size())
+        {
+            if(*a == *b){
+                a++;
+                b++;
+                c++;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+}
+
+template<typename T>
+bool operator!=(List<T> const& xs, List<T> const& ys)
+{
+    return !(xs == ys);
+}
 
 
 # endif

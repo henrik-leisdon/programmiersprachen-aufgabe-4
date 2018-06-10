@@ -87,6 +87,11 @@ TEST_CASE("constr and getter")
             REQUIRE(list1 == list2);
         }
 
+
+    SECTION("reverse")
+    {
+        
+    }
 };
 
 

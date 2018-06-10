@@ -312,6 +312,12 @@ void reverse()
 {
     ListIterator<T>it = begin();
     push_front(back());
+    pop_back();
+    while(it!=end())
+    {
+        insert(it,back());
+        pop_back();
+    }
 }
 
 ListIterator<T> begin() const

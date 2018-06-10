@@ -41,7 +41,8 @@ public :
         return node -> value;
     } 
     pointer operator->() const {
-        return *node;
+        T* result = node->value;
+        return result;
     } 
     Self& operator++() {
         node = node->next;
@@ -66,14 +67,15 @@ public :
         return ListIterator(nullptr);
     }
 
+    ListNode<T>& getListNode()
+    {
+        return *node;
+    }
 
 private :
     ListNode <T >* node ;
 
-    ListNode<T>& getListNode()
-    {
-    return *node;
-    }
+
 
 };
 
@@ -298,7 +300,7 @@ void insert(ListIterator<T> pos, T const& object)
     }
     ListNode<T>*node = new ListNode<T>;
     node->value = object;
-    node->prsev=it.getListNode().prsev;
+    node->prsev= it.getListNode().prsev;
     it.getListNode().prsev->next = node;
     it.getListNode().prsev = node;
     if(it!=end())
@@ -383,6 +385,16 @@ bool operator!=(List<T> const& xs, List<T> const& ys)
 {
     return !(xs == ys);
 }
+
+template<typename T>
+List<T>&reverse(List<T> const& list)
+{
+    List<T>*result = new List<T>{list};
+    result->reverse();
+    return *result;
+}
+
+
 
 
 # endif

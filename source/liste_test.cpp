@@ -90,7 +90,13 @@ TEST_CASE("constr and getter")
 
     SECTION("reverse")
     {
-        
+        List<int> list;
+        list.push_front(1);
+        list.push_front(2);
+        list.push_front(3);
+        list.push_front(4);
+        list.reverse();
+        REQUIRE(1 == *list.begin());    
     }
 };
 

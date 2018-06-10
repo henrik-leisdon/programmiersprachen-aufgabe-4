@@ -76,6 +76,17 @@ TEST_CASE("constr and getter")
         REQUIRE(43 == *liste.end());
     }
 
+        SECTION("copy consrt")
+        {
+            List<int> list1;
+            list1.push_front(1);
+            list1.push_front(2);
+            list1.push_front(3);
+            list1.push_front(4);
+            List<int>list2{list1};
+            REQUIRE(list1 == list2);
+        }
+
 };
 
 

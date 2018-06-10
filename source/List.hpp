@@ -122,7 +122,8 @@ List(List<T> const& list):
     last_{nullptr},
     size_{0}
 {
-    for(auto it = list.begin(); it!=list.end(); it++){
+    for(auto it = list.begin(); it!=list.end(); it++)
+    {
         push_back(*it);
     }
 };
@@ -134,12 +135,12 @@ List(List<T>&& list):
     {
        list.first_=nullptr;
        list.last_=nullptr;
-       list.size-=0; 
+       list.size_=0; 
     }
 
 List(std::initializer_list<T> list)
 {
-    for(auto it : list)
+    for(auto it: list)
     {
         push_back(it);
     }
@@ -288,6 +289,31 @@ void clear()
     }
 }
 
+void insert(ListIterator<T> pos, T const& object)
+{
+    ListIterator<T>it=begin();
+    while(it!=pos)
+    {
+        it++;
+    }
+    ListNode<T>*node = new ListNode<T>;
+    node->value = object;
+    node->prsev=it.getListNode().prsev;
+    it.getListNode().prsev->next = node;
+    it.getListNode().prsev = node;
+    if(it!=end())
+    {
+        (*node).next = it.next().getListNode().prsev;
+    }
+    size_++;
+}
+
+void reverse()
+{
+    ListIterator<T>it = begin();
+    push_front(back());
+}
+
 ListIterator<T> begin() const
 {
     return ListIterator<T>{first_};
@@ -343,6 +369,8 @@ bool operator==(List<T> const& xs, List<T> const& ys)
 
 
 }
+
+
 
 template<typename T>
 bool operator!=(List<T> const& xs, List<T> const& ys)

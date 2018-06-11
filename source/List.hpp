@@ -67,13 +67,15 @@ public :
         return ListIterator(nullptr);
     }
 
-    ListNode<T>& getListNode()
+        ListNode<T>& getListNode()
     {
         return *node;
     }
 
+
 private :
     ListNode <T >* node ;
+
 
 
 
@@ -119,12 +121,12 @@ List(ListNode<T>* first):
 
 
 
-List(List<T> const& list):
+List(List<T> const& liste):
     first_{nullptr},
     last_{nullptr},
     size_{0}
 {
-    for(auto it = list.begin(); it!=list.end(); it++)
+    for(auto it = liste.begin(); it!=liste.end(); ++it)
     {
         push_back(*it);
     }
@@ -186,7 +188,7 @@ T back() const{
     }
     else
     {
-        return (*last_).value;
+        return last_->value;
     }
 }
 
@@ -252,8 +254,6 @@ void pop_front(){
 
 }
 
-
-
 void pop_back(){
     if(empty()){
         std::cout << "list is already empty";        
@@ -315,7 +315,7 @@ void reverse()
     ListIterator<T>it = begin();
     push_front(back());
     pop_back();
-    while(it!=end())
+    while(it!=last())
     {
         insert(it,back());
         pop_back();
@@ -330,6 +330,11 @@ ListIterator<T> begin() const
 ListIterator<T> end() const
 {
     return ListIterator<T>{last_}.next();
+}
+
+ListIterator<T> last() const
+{
+    return ListIterator<T>{last_};
 }
 
 List<T>& operator=(List<T>const& list)
@@ -362,14 +367,14 @@ bool operator==(List<T> const& xs, List<T> const& ys)
         int c = 0;
         while(c<xs.size())
         {
-            if(*a == *b){
-                a++;
-                b++;
-                c++;
+            if(*a != *b){
+                return false;
             }
             else
             {
-                return false;
+                a++;
+                b++;
+                c++;
             }
         }
         return true;

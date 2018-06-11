@@ -52,7 +52,8 @@ TEST_CASE("constr and getter")
         liste.clear();
         REQUIRE(liste.empty()); 
     }
-
+};
+TEST_CASE("mod methods"){
     SECTION("sould be an empty range...")
     {
         List<int> liste2;
@@ -73,19 +74,55 @@ TEST_CASE("constr and getter")
         List<int> liste;
         liste.push_front(42);
         liste.push_back(43);
-        REQUIRE(43 == *liste.end());
+        REQUIRE(43 == *liste.last());
     }
 
-        SECTION("copy consrt")
+        SECTION("copy constr 1")
         {
             List<int> list1;
             list1.push_front(1);
             list1.push_front(2);
             list1.push_front(3);
             list1.push_front(4);
-            List<int>list2{list1};
+            List<int> list2{list1};
+            REQUIRE(list2 == list1);
+        }
+
+        SECTION("copy consrt 2")
+        {
+            List<int> list1;
+            list1.push_front(1);
+            list1.push_front(2);
+            list1.push_front(3);
+            list1.push_front(4);
+        
+            List<int> list2;
+            list2.push_front(5);
+            list2.push_front(6);
+            list2 = list1;
+
+            REQUIRE(4 == list2.front());
+            REQUIRE(1 == list2.back());
+        }
+
+        SECTION("== op test 2")
+        {
+           List<int> list1;
+            List<int> list2;
+            list1.push_front(12);
+            list2.push_front(12);
             REQUIRE(list1 == list2);
         }
+
+       /* SECTION("== op test")
+        {
+            List<int> list1;
+            List<int> list2;
+            list1.push_front(12);
+            list2.push_front(13);
+            REQUIRE(list1 == list2);
+        }*/
+
 
 
     SECTION("reverse")
@@ -96,8 +133,35 @@ TEST_CASE("constr and getter")
         list.push_front(3);
         list.push_front(4);
         list.reverse();
-        REQUIRE(1 == *list.begin());    
+        REQUIRE(1 == list.front());    
     }
+
+    SECTION("vector")
+    {
+        List<int> list;
+        list.push_front(1);
+        list.push_front(2);
+        list.push_front(3);
+        list.push_front(4);
+        std::vector<int> vector(4);
+        std::copy(list.begin(),list.end(),vector.begin());
+        REQUIRE(4 == vector.front());
+        REQUIRE(1 == vector.back());
+    }
+
+    SECTION("move constr")
+    {
+        List<int> list;
+        list.push_front(1);
+        list.push_front(2);
+        list.push_front(3);
+        list.push_front(4);
+        List<int> list2 = std::move(list);
+        REQUIRE(0==list.size());
+        REQUIRE(list.empty());
+        REQUIRE(4==list2.size());
+    }
+    
 };
 
 

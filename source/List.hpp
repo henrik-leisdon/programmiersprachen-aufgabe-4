@@ -399,9 +399,6 @@ List<T>&reverse(List<T> const& list)
     return *result;
 }
 
-
-
-
 # endif
 
 //#define BUW_LIST_HPP 
